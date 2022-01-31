@@ -1,0 +1,65 @@
+body {
+  background-color: cornflowerblue;
+  height:98%;
+  display: flex;
+}
+.avatar {
+  position:absolute;
+  top:6%;
+  left:44%;
+  z-index: 1;
+}
+.homeContainer {
+  position: absolute;
+  left:33%;
+  background-color:rgba(150,150,150,0.6);
+  font-family:sans-serif;
+  width:400px;
+  height:520px;
+  margin:110px auto;
+  border-radius:40px;
+  border:3px double #fff;
+  transition:all 0.6 ease;
+  z-index: -1;
+}
+.homeContainer:hover {
+  box-shadow:4px 4px 20px inset #fff;
+}
+.box {
+  padding-top: 10px;
+  padding-left: 40px;
+}
+a {
+  color:indigo;
+  text-decoration:underline;
+}
+.userForm {
+  width: 75%;
+}
+.voteForm {
+  padding-top: 30px;
+  text-align: center;
+  font-size: 200%;
+}
+.controls {
+  position: absolute;
+  top: 1%;
+  right: 1%;
+  display: flex;
+  align-content: center;
+  width: 250px;
+  justify-content: space-between;
+}
+.aadhaarno {
+  color: #ffffff;
+  font-size: x-large;
+}
+.guidelines {
+  font-family:sans-serif;
+  display: inline;
+  width: 28%;
+  position: absolute;
+  left: 1%;
+  bottom: 1%;
+  color: #941a1a;
+}

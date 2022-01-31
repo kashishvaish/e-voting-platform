@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Login To Vote - E-Voting System</title>
+{% endblock title %}
+
+{% block content %}  
+    <div class="avatar">
+        <img src="{% static 'images/avatar.png' %}" alt="avatar" width="100" height="100">
+    </div>
+    <div class="homeContainer">  
+        <div class="container">
+            <br />
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        {{message}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>            
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="box">
+            <form method="POST" enctype="multipart/form-data" class="userForm mt-2">
+                {% csrf_token %}
+                {{register_form|crispy}}
+                <button class="btn btn-primary mb-5" type="submit">Proceed</button>
+            </form> 
+        </div>
+    </div> 
+    <div class="guidelines">
+        <h4><b>Guidelines</b></h4>
+        <ul>
+            <li>
+                <p>
+                    After successful Aadhaar Verification, webcam will be used for face verfication. Ensure that your face is clearly visible. 
+                </p>
+            </li> 
+            <li>
+                <p>
+                    Enter DOB (Date of Birth) in the format: <b>dd/mm/yyyy</b>
+                </p>
+            </li> 
+            <li>
+                <p>
+                    Upload A Clear Image Of Your Aadhaar Card.
+                </p>
+            </li> 
+            <li>
+                <p>
+                    QR Code must be properly visible.
+                </p>
+            </li> 
+            <li>
+                <p>
+                    Aadhaar Card image with Normal QR code must be uploaded. (NOT SECURE QR)
+                </p>
+            </li> 
+        </ul>
+        Click for more security concerns, <a href="{% url 'details' %}">Security Concerns</a>
+    </div> 
+{% endblock content %}

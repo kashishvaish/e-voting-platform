@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Vote - E-Voting System</title>
+{% endblock title %}
+
+{% block content %}
+    <div class="controls">
+        <span class="aadhaarno">{{aadhaar_no}}</span>
+        <a href="{% url 'logout' %}">
+            <button class="btn btn-danger mb-5">
+                Logout
+            </button>
+        </a> 
+    </div>
+    <div class="avatar">
+        <img src="{% static 'images/avatar.png' %}" alt="avatar" width="100" height="100">
+    </div>
+    <div class="container">
+    <div class="homeContainer">  
+            <br />
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        {{message}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>         
+                {% endfor %}
+            {% endif %}
+        <div class="voteForm">
+            <h3>Select You Candidate</h3>
+            <br />
+            <form method="POST" class="mt-2">
+                {% csrf_token %}
+                {{form |crispy}}
+                <br />
+                <input type="submit" class="btn btn-primary mb-5" value="VOTE">
+            </form>
+        </div>
+    </div>
+{% endblock content %}
