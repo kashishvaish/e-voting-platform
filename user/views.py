@@ -12,6 +12,7 @@ from PIL import Image
 import numpy as np
 import io
 import os
+import base64
 
 FACE_API_KEY=os.environ['FACE_API_KEY']
 FACE_ENDPOINT=os.environ['FACE_ENDPOINT']
@@ -31,10 +32,11 @@ def register(request):
         return redirect('homepage')
     if request.method == "POST":
         register_form = CustomRegisterForm(request.POST, request.FILES)
+        face_image = request.POST['faceImage']
         if register_form.is_valid():
             face_id = aadhaar_verification(register_form)
             if face_id:
-                face_match = face_verification(face_id)
+                face_match = face_verification(face_id, face_image)
                 if face_match:
                     request.session.set_expiry(300)
                     request.session['id'] = register_form.cleaned_data['aadhaar_no']
@@ -106,12 +108,10 @@ def aadhaar_verification(register_form):
                         return person1.face_id
     return False
 
-def face_verification(id):
-    cap=cv2.VideoCapture(0)
-    while True:
-        _, img = cap.read()
-        ret,buf = cv2.imencode('.jpg', img) 
-        stream = io.BytesIO(buf)
+def face_verification(id, face_image):
+    temp = base64.b64decode(face_image)
+    stream = io.BytesIO(temp)
+    try:
         response_detected_faces = face_client.face.detect_with_stream(
             stream, 
             return_face_id=True,
@@ -126,9 +126,8 @@ def face_verification(id):
                 face_id2=id2
             )
             return face_verified.is_identical
-        if cv2.waitKey(1) & 0xFF ==ord('q'):
-            break
-    cap.release()
+    except:
+        return False
     return False
 
 def logout(request):

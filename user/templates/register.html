@@ -3,6 +3,8 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
+    <script src="{% static 'js/webcam.js' %}"></script>
+    <script src="{% static 'js/register.js' %}"></script>
     <title>Login To Vote - E-Voting System</title>
 {% endblock title %}
 
@@ -10,7 +12,7 @@
     <div class="avatar">
         <img src="{% static 'images/avatar.png' %}" alt="avatar" width="100" height="100">
     </div>
-    <div class="homeContainer">  
+    <div class="registerFormContainer">  
         <div class="container">
             <br />
             {% if messages %}
@@ -25,19 +27,30 @@
             {% endif %}
         </div>
         <div class="box">
-            <form method="POST" enctype="multipart/form-data" class="userForm mt-2">
+            <form method="POST" enctype="multipart/form-data" class="userForm mt-2" id="registerForm">
                 {% csrf_token %}
                 {{register_form|crispy}}
-                <button class="btn btn-primary mb-5" type="submit">Proceed</button>
+                <input type="hidden" id="faceImage" name="faceImage" required> 
+                <button class="btn btn-danger" onclick="openCamera()">Capture Image For Face Verification</button>
+                <div class="error mb-2" id="error"></div>
+                <button class="btn btn-primary mb-5" onclick="validate()">Proceed</button>
             </form> 
         </div>
     </div> 
+
+    <!-- webcam -->
+    <div class="cameraContainer">
+        <div id="my_camera" class="camera"></div>
+        <div id="my_result"></div>
+        <a class="captureButton btn btn-success mt-2" id="captureButton" href="javascript:void(take_snapshot())">Click Image</a>
+    </div>
+
     <div class="guidelines">
         <h4><b>Guidelines</b></h4>
         <ul>
             <li>
                 <p>
-                    After successful Aadhaar Verification, webcam will be used for face verfication. Ensure that your face is clearly visible. 
+                    For face verfication capture a clear image of your face. Ensure that your face is visible properly in the captured image. 
                 </p>
             </li> 
             <li>
@@ -62,5 +75,5 @@
             </li> 
         </ul>
         Click for more security concerns, <a href="{% url 'details' %}">Security Concerns</a>
-    </div> 
+    </div>
 {% endblock content %}

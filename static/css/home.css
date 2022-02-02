@@ -25,6 +25,22 @@ body {
 .homeContainer:hover {
   box-shadow:4px 4px 20px inset #fff;
 }
+.registerFormContainer {
+  position: absolute;
+  left:33%;
+  background-color:rgba(150,150,150,0.6);
+  font-family:sans-serif;
+  width:400px;
+  height:650px;
+  margin:110px auto;
+  border-radius:40px;
+  border:3px double #fff;
+  transition:all 0.6 ease;
+  z-index: -1;
+}
+.registerFormContainer:hover {
+  box-shadow:4px 4px 20px inset #fff;
+}
 .box {
   padding-top: 10px;
   padding-left: 40px;
@@ -62,4 +78,24 @@ a {
   left: 1%;
   bottom: 1%;
   color: #941a1a;
+}
+.camera {
+  width:320px; 
+  height:240px;
+}
+.cameraContainer {
+  position: absolute;
+  right: 1%;
+  bottom: 1%;
+  display: inline-block;
+  width:400px; 
+  height:300px;
+  text-align: center;
+}
+.captureButton {
+  visibility: hidden;
+}
+.error {
+  color: #941a1a;
+  font-size: small;
 }
