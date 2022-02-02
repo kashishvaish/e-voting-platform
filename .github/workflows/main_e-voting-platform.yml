@@ -28,16 +28,11 @@ jobs:
           source venv/bin/activate
       
       - name: Install dependencies
-        run: pip install -r requirements.txt
-        
-      - name: Install cv2 dependencies step1
-        run: apt-get update
-        
-      - name: Install cv2 dependencies step2
-        run: apt-get install ffmpeg libsm6 libxext6  -y
-        
-      - name: Install zbar tools
-        run: apt-get install zbar-tools
+        run: |
+          pip install -r requirements.txt
+          apt-get update
+          apt-get install ffmpeg libsm6 libxext6  -y
+          apt-get install zbar-tools
         
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
