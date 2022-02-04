@@ -76,8 +76,9 @@ a {
   width: 28%;
   position: absolute;
   left: 1%;
-  bottom: 1%;
-  color: #941a1a;
+  bottom: 2%;
+  color: #680c0c;
+  font-size: small;
 }
 .camera {
   width:320px; 
@@ -98,4 +99,7 @@ a {
 .error {
   color: #941a1a;
   font-size: small;
+}
+.enterDetails {
+  visibility: hidden;
 }

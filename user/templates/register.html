@@ -17,7 +17,7 @@
             <br />
             {% if messages %}
                 {% for message in messages %}
-                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    <div class="alert {{message.tags}} alert-dismissible fade show" role="alert">
                         {{message}}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -29,11 +29,31 @@
         <div class="box">
             <form method="POST" enctype="multipart/form-data" class="userForm mt-2" id="registerForm">
                 {% csrf_token %}
-                {{register_form|crispy}}
+                {% comment %} {{register_form|crispy}} {% endcomment %}
+                
                 <input type="hidden" id="faceImage" name="faceImage" required> 
-                <button class="btn btn-danger" onclick="openCamera()">Capture Image For Face Verification</button>
-                <div class="error mb-2" id="error"></div>
-                <button class="btn btn-primary mb-5" onclick="validate()">Proceed</button>
+                <button class="btn btn-danger mt-4 ml-4" id="capture" onclick="openCamera()">Capture Image For Face Verification</button>
+
+                <div class="enterDetails" id="enterDetails">
+                    <div class="form-group">
+                        Aadhaar Number:
+                        <input class="form-control" type="number" id="aadhaarNo" name="aadhaarNo" placeholder="Enter 12 digit Aadhaar number" required>
+                    </div>
+                    <div class="form-group">
+                        Name:
+                        <input class="form-control" type="text" id="name" name="name" placeholder="Name as written on Aadhaar Card" required>
+                    </div>
+                    <div class="form-group">
+                        Date Of Birth (DOB):
+                        <input class="form-control" type="date" id="dob" name="dob" required>
+                    </div>
+                    <div class="form-group">
+                        Aadhaar Card Image (jpeg/png): 
+                        <div class="form-text text-muted">Size Less than 4mb</div>
+                        <input type="file" id="aadhaarImage" name="aadhaarImage" accept="image/png, image/jpeg" required>
+                    </div>
+                    <button class="btn btn-primary mb-5" onclick="validate()">Submit</button>                    
+                </div>
             </form> 
         </div>
     </div> 
@@ -46,34 +66,43 @@
     </div>
 
     <div class="guidelines">
-        <h4><b>Guidelines</b></h4>
+        <h4><b>GUIDELINES</b></h4>
         <ul>
             <li>
                 <p>
-                    For face verfication, Capture a clear image of your face. Ensure that your face is visible properly in the captured image. 
+                    <b>Step1:</b> For face verification, click on "Capture Image For Face Verification" and capture a clear image of your face. Ensure that your face is visible properly in the captured image. After capturing image a form will appear. 
                 </p>
             </li> 
             <li>
                 <p>
-                    Enter DOB (Date of Birth) in the format: <b>dd/mm/yyyy</b>
+                    <b>Step2:</b> Enter your 12 Digit Aadhaar Number
+                </p>
+            </li>
+            <li>
+                <p>
+                    <b>Step3:</b> Enter your name as written on your Aadhaar Card.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <b>Step4:</b> Enter your DOB (Date of Birth)
                 </p>
             </li> 
             <li>
                 <p>
-                    Upload A Clear Image Of Your Aadhaar Card.
+                    <b>Step5:</b> Upload A Clear Image Of Your Aadhaar Card in jpg or png format only. The file size must not exceed 4MB.
                 </p>
             </li> 
             <li>
                 <p>
-                    QR Code must be properly visible.
+                    <b>NOTE:</b>
+                    <ul>
+                        <li>QR Code must be properly visible.</li>
+                        <li>Aadhaar Card image with Normal QR code must be uploaded. (NOT SECURE QR)</li>
+                    </ul>
                 </p>
-            </li> 
-            <li>
-                <p>
-                    Aadhaar Card image with Normal QR code must be uploaded. (NOT SECURE QR)
-                </p>
-            </li> 
+            </li>
         </ul>
-        Click for more security concerns, <a href="{% url 'details' %}">Security Concerns</a>
+        <b>Click for more security concerns, <a href="{% url 'details' %}">Security Concerns</a></b>
     </div>
 {% endblock content %}

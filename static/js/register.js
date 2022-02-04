@@ -17,17 +17,32 @@ function take_snapshot() {
         document.getElementById('faceImage').value = raw_image_data        
         Webcam.reset();
         document.getElementById('captureButton').style.visibility = "hidden";
-        document.getElementById('error').innerHTML = "Captured"
-        document.getElementById('error').style.color = "green"
+        document.getElementById('enterDetails').style.visibility = "visible";
+        document.getElementById('capture').style.visibility = "hidden";
     } );            
 }
 
 function validate() {
-    if (document.getElementById('faceImage').value) {
+    if (document.getElementById('faceImage').value && 
+    document.getElementById('aadhaarNo').value &&
+    document.getElementById('name').value &&
+    document.getElementById('dob').value &&
+    document.getElementById('aadhaarImage').value) {
         document.getElementById('registerForm').submit();
     }
-    else {
-        document.getElementById('error').innerHTML = "*Capture Your Image";
+    else if (document.getElementById('faceImage').value == "") {
         alert("Capture Image for face Verification!!");
+    }
+    else if (document.getElementById('aadhaarNo').value == "") {
+        alert("Enter your Aadhaar Number!!");
+    }
+    else if (document.getElementById('name').value == "") {
+        alert("Enter your Name!!");
+    }
+    else if (document.getElementById('dob').value == "") {
+        alert("Enter your Date of Birth!!");
+    }
+    else if (document.getElementById('aadhaarImage').value == "") {
+        alert("Upload your Aadhaar Card Image!!");
     }
 }

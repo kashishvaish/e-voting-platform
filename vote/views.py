@@ -18,7 +18,7 @@ def homepage(request):
                 VotersList.objects.create(
                     aadhaar_no=request.session['id'], 
                     name=request.session['name'], 
-                    dob=datetime.datetime.strptime(request.session['dob'], "%d/%m/%Y")
+                    dob=datetime.datetime.strptime(request.session['dob'], "%Y-%m-%d")
                 )
                 selected = vote_form.cleaned_data['vote']
                 isPresent = Votes.objects.filter(candidate=selected).count()
