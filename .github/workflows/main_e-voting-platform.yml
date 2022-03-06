@@ -36,7 +36,7 @@ jobs:
           apt-get update
           apt-get install ffmpeg libsm6 libxext6  -y
           apt-get install zbar-tools -y
-        shell: sh
+        shell: bash
           
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
