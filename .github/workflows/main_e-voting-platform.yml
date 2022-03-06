@@ -31,13 +31,6 @@ jobs:
         run: |
           pip install -r requirements.txt
           
-      - name: script
-        run: |
-          sudo apt-get update
-          sudo apt-get install ffmpeg libsm6 libxext6  -y
-          sudo apt-get install zbar-tools -y
-        shell: bash
-          
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       
@@ -70,3 +63,10 @@ jobs:
           app-name: 'e-voting-platform'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_806F0326DEB04E0CA4A45FD0DFDAB521 }}
+      
+      - name: script
+        run: |
+          sudo apt-get update
+          sudo apt-get install ffmpeg libsm6 libxext6  -y
+          sudo apt-get install zbar-tools -y
+        shell: bash
