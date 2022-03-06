@@ -33,9 +33,9 @@ jobs:
           
       - name: script
         run: |
-          apt-get update
-          apt-get install ffmpeg libsm6 libxext6  -y
-          apt-get install zbar-tools -y
+          sudo apt-get update
+          sudo apt-get install ffmpeg libsm6 libxext6  -y
+          sudo apt-get install zbar-tools -y
         shell: bash
           
         
